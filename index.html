@@ -1,0 +1,1136 @@
+<html><head><base href="."><title>Main Menu</title>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: url('https://cdn.discordapp.com/attachments/1313411856026701876/1313610522238914690/costume184.png?ex=6750c2a2&is=674f7122&hm=2d4b9bdc6e2b6a034359def30545dfd85b1ebfcc0492d68e9a9620b908eeb86d&');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+}
+
+.main-menu {
+    background: rgba(0, 0, 255, 0.95);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 255, 0.5);
+    text-align: center;
+}
+
+.main-menu h1, 
+.main-menu button {
+    color: white;
+}
+
+.button {
+    display: block;
+    width: 250px;
+    margin: 15px;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 15px rgba(0, 128, 255, 0.5);
+}
+
+#leaveBtn {
+    background: linear-gradient(45deg, #ff4444, #ff0000);
+    color: white;
+}
+
+#gamesBtn {
+    background: cyan;
+}
+
+#emulatorsBtn {
+    background: #00ff00;
+}
+
+#youtubeBtn {
+    background: #000000;
+    color: white;
+    width: 250px;
+    height: auto;
+    border-radius: 8px;
+    padding: 15px 30px;
+    margin: 15px;
+    position: static;
+    display: block;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    font-size: 1.2em; /* Match other button text size */
+}
+
+#youtubeBtn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+}
+
+#leaveBtn:hover {
+    animation: shake 0.5s ease-in-out infinite;
+    transform: none !important;
+}
+
+.games-list {
+    display: none;
+    list-style: none;
+    padding: 0;
+}
+
+.games-list li {
+    margin: 10px 0;
+}
+
+.games-list a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.games-list a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
+.back-button {
+    display: none;
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+}
+
+.back-button:hover {
+    background: #c82333;
+    transform: scale(1.05);
+}
+
+.game-container {
+    display: none;
+    width: 300px;
+    height: 600px;
+    border: 2px solid #00ff80;
+    position: relative;
+    background: #000;
+    box-shadow: 0 0 20px rgba(0, 255, 128, 0.3);
+}
+
+/* Tetris styling */
+.tetris-block {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+/* Blockbuster styling */
+.blockbuster-container {
+    display: none;
+    width: 400px;
+    height: 500px;
+    background: #000;
+    position: relative;
+    border: 2px solid #00ff80;
+    box-shadow: 0 0 20px rgba(0, 255, 128, 0.3);
+}
+
+.paddle {
+    width: 100px;
+    height: 20px;
+    background: linear-gradient(to right, #00ff80, #00bfff);
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 255, 128, 0.5);
+}
+
+.ball {
+    width: 15px;
+    height: 15px;
+    background: #fff;
+    border-radius: 50%;
+    position: absolute;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+.brick {
+    width: 58px;
+    height: 18px;
+    position: absolute;
+    border-radius: 3px;
+    box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+#gifBtn {
+    position: absolute;
+    top: 90px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    overflow: hidden;
+}
+
+#gifBtn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+#gifBtn img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Popup styles */
+.popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup {
+    background: #2d2d2d;
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.popup h2 {
+    margin-bottom: 20px;
+    color: white;
+}
+
+.popup-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.popup-button {
+    padding: 10px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: all 0.3s ease;
+}
+
+.popup-button.yes {
+    background: #ff0000;
+    color: white;
+}
+
+.popup-button.yes:hover {
+    background: #cc0000;
+    animation: crazyNoShake 0.2s infinite;
+}
+
+.popup-button.no {
+    background: #007bff;
+    color: white;
+}
+
+.popup-button.no:hover {
+    background: #0056b3;
+}
+
+/* Add new keyframes for the "no" button's more intense shaking */
+@keyframes crazyNoShake {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    10% { transform: translate(-25px, 25px) rotate(-25deg); }
+    20% { transform: translate(25px, -25px) rotate(25deg); }
+    30% { transform: translate(-25px, -25px) rotate(-25deg); }
+    40% { transform: translate(25px, 25px) rotate(25deg); }
+    50% { transform: translate(-25px, 15px) rotate(-15deg); }
+    60% { transform: translate(25px, -15px) rotate(15deg); }
+    70% { transform: translate(-15px, -25px) rotate(-25deg); }
+    80% { transform: translate(15px, 25px) rotate(25deg); }
+    90% { transform: translate(-25px, -15px) rotate(-15deg); }
+    100% { transform: translate(25px, 15px) rotate(15deg); }
+}
+
+@keyframes rainbowFade {
+    0% { color: #ff0000; }
+    20% { color: #ffff00; }
+    40% { color: #00ff00; }
+    60% { color: #0000ff; }
+    80% { color: #8000ff; }
+    100% { color: #ff0000; }
+}
+
+.rainbow-mode {
+    animation: rainbowFade 5s linear infinite;
+}
+
+.rainbow-mode button {
+    animation: rainbowFade 5s linear infinite;
+}
+
+.rainbow-mode a {
+    animation: rainbowFade 5s linear infinite;
+}
+
+/* Boss Fight Game Styling */
+.boss-fight-container {
+    display: none;
+    width: 400px;
+    height: 400px;
+    position: relative;
+    background: #000;
+    border: 2px solid #ff0000;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+}
+
+.boss {
+    width: 70px;
+    height: 70px;
+    background: #ff0000;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 35px;
+}
+
+.player {
+    width: 50px;
+    height: 50px;
+    background: #00ff80;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 25px;
+}
+
+.bullet {
+    width: 5px;
+    height: 20px;
+    background: #ffff00;
+    position: absolute;
+}
+
+/* Chat styles */
+@keyframes spinForever {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.spinning {
+    animation: spinForever 2s linear infinite;
+}
+
+@keyframes rotateBackground {
+    from {
+        background-position: center;
+        transform: rotate(0deg);
+    }
+    to {
+        background-position: center;
+        transform: rotate(360deg);
+    }
+}
+
+.rotating-background {
+    animation: rotateBackground 5s linear infinite;
+}
+
+#emulatorsList {
+    display: none;
+}
+
+.minecraft-container {
+    display: none;
+    width: 800px;
+    height: 600px;
+    position: relative;
+    background: #87CEEB;
+    border: 2px solid #654321;
+    box-shadow: 0 0 20px rgba(101, 67, 33, 0.5);
+}
+
+#minecraftCanvas {
+    width: 100%;
+    height: 100%;
+    image-rendering: pixelated;
+}
+
+#oiiaoiiaBtn {
+    background: white;
+    color: black;
+    display: block;
+    width: 250px;
+    margin: 15px;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#oiiaoiiaBtn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+.copyright {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 14px;
+    text-align: center;
+    z-index: 1000;
+}
+</style>
+</head>
+<body>
+    <div class="main-menu">
+        <h1>Main Menu</h1>
+        <button id="gamesBtn" class="button">Games</button>
+        <button id="emulatorsBtn" class="button">Emulators</button>
+        <button id="youtubeBtn" onclick="window.open('https://www.youtube.com/@o._.369', '_blank')">bub</button>
+        <button id="oiiaoiiaBtn" class="button">oiiaoiia</button> <!-- New button -->
+        <button id="leaveBtn" class="button">Leave Website</button>
+        
+        <ul id="gamesList" class="games-list">
+            <li><h3 style="color: white; margin-bottom: 15px;">Games</h3></li>
+            <li><a id="tetrisLink">Tetris</a></li>
+            <li><a id="blockbusterLink">Blockbuster</a></li>
+            <li><a href="https://unity.com/download">Unity Download</a></li>
+            <li><a id="minecraftLink">2D Minecraft</a></li>
+        </ul>
+
+        <ul id="emulatorsList" class="games-list">
+            <li><h3 style="color: white; margin-bottom: 15px;">Emulators</h3></li>
+            <li><a href="https://copy.sh/v86/?profile=windows98">Windows 95</a></li>
+            <li><a href="https://copy.sh/v86/?profile=windows1">Windows 1.01</a></li>
+        </ul>
+        
+        <button id="backBtn" class="back-button">Back to Main Menu</button>
+    </div>
+
+    <div id="tetrisGame" class="game-container"></div>
+    <div id="blockbusterGame" class="blockbuster-container">
+        <div class="paddle"></div>
+        <div class="ball"></div>
+    </div>
+    <div id="bossFightGame" class="boss-fight-container">
+        <div class="boss"></div>
+        <div class="player"></div>
+    </div>
+    <div id="minecraftGame" class="minecraft-container">
+        <canvas id="minecraftCanvas"></canvas>
+    </div>
+
+    <div class="popup-overlay">
+        <div class="popup">
+            <h2>Are you sure?</h2>
+            <div class="popup-buttons">
+                <button class="popup-button yes">Yes</button>
+                <button class="popup-button no">No</button>
+            </div>
+        </div>
+    </div>
+
+<div class="copyright">2024 © bub</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    let currentUsername = 'user' + Math.floor(Math.random() * 10000);
+    let isDev = false;
+
+    // Add event listener for Konami code
+    let konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight'];
+    let konamiIndex = 0;
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === konamiCode[konamiIndex]) {
+            konamiIndex++;
+            if (konamiIndex === konamiCode.length) {
+                konamiIndex = 0;
+                const bossFightButton = document.createElement('button');
+                bossFightButton.textContent = 'BUB FIGHT';
+                bossFightButton.style.position = 'fixed';
+                bossFightButton.style.bottom = '20px';
+                bossFightButton.style.right = '20px';
+                bossFightButton.style.padding = '10px 20px';
+                bossFightButton.style.background = '#ff0000';
+                bossFightButton.style.color = 'white';
+                bossFightButton.style.border = 'none';
+                bossFightButton.style.borderRadius = '5px';
+                bossFightButton.style.cursor = 'pointer';
+                bossFightButton.style.animation = 'rainbowFade 1s linear infinite';
+                document.body.appendChild(bossFightButton);
+                
+                bossFightButton.addEventListener('click', () => {
+                    // Your boss fight logic here
+                });
+            }
+        } else {
+            konamiIndex = 0;
+        }
+    });
+
+    const gamesBtn = document.getElementById('gamesBtn');
+    const emulatorsBtn = document.getElementById('emulatorsBtn');
+    const leaveBtn = document.getElementById('leaveBtn');
+    const youtubeBtn = document.getElementById('youtubeBtn');
+    const oiiaoiiaBtn = document.getElementById('oiiaoiiaBtn'); // New button reference
+    const gamesList = document.getElementById('gamesList');
+    const emulatorsList = document.getElementById('emulatorsList');
+    const backBtn = document.getElementById('backBtn');
+    const tetrisGame = document.getElementById('tetrisGame');
+    const blockbusterGame = document.getElementById('blockbusterGame');
+    const bossFightGame = document.getElementById('bossFightGame');
+    const minecraftGame = document.getElementById('minecraftGame');
+    const mainMenu = document.querySelector('.main-menu');
+    const popupOverlay = document.querySelector('.popup-overlay');
+
+    let tetrisInterval;
+    let blockbusterInterval;
+    let bossFightInterval;
+    let currentGame = null;
+
+    // Prevent default behavior for arrow keys
+    window.addEventListener('keydown', (e) => {
+        if(['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '].includes(e.key)) {
+            e.preventDefault();
+        }
+    });
+
+    gamesBtn.addEventListener('click', () => {
+        gamesBtn.style.display = 'none';
+        emulatorsBtn.style.display = 'none';
+        youtubeBtn.style.display = 'none';
+        oiiaoiiaBtn.style.display = 'none'; // Hide new button
+        leaveBtn.style.display = 'none';
+        gamesList.style.display = 'block';
+        emulatorsList.style.display = 'none';
+        backBtn.style.display = 'block';
+    });
+
+    emulatorsBtn.addEventListener('click', () => {
+        gamesBtn.style.display = 'none';
+        emulatorsBtn.style.display = 'none';
+        youtubeBtn.style.display = 'none';
+        oiiaoiiaBtn.style.display = 'none'; // Hide new button
+        leaveBtn.style.display = 'none';
+        gamesList.style.display = 'none';
+        emulatorsList.style.display = 'block';
+        backBtn.style.display = 'block';
+    });
+
+    backBtn.addEventListener('click', () => {
+        gamesBtn.style.display = 'block';
+        emulatorsBtn.style.display = 'block';
+        youtubeBtn.style.display = 'block';
+        oiiaoiiaBtn.style.display = 'block'; // Show new button
+        leaveBtn.style.display = 'block';
+        gamesList.style.display = 'none';
+        emulatorsList.style.display = 'none';
+        backBtn.style.display = 'none';
+        
+        if (currentGame) {
+            currentGame.style.display = 'none';
+            if (tetrisInterval) clearInterval(tetrisInterval);
+            if (blockbusterInterval) clearInterval(blockbusterInterval);
+            if (bossFightInterval) clearInterval(bossFightInterval);
+            currentGame = null;
+        }
+        
+        mainMenu.style.display = 'block';
+    });
+
+    // Tetris Game
+    document.getElementById('tetrisLink').addEventListener('click', () => {
+        mainMenu.style.display = 'none';
+        tetrisGame.style.display = 'block';
+        currentGame = tetrisGame;
+        initTetris();
+    });
+
+    // Blockbuster Game
+    document.getElementById('blockbusterLink').addEventListener('click', () => {
+        mainMenu.style.display = 'none';
+        blockbusterGame.style.display = 'block';
+        currentGame = blockbusterGame;
+        initBlockbuster();
+    });
+
+    // Minecraft Game
+    document.getElementById('minecraftLink').addEventListener('click', () => {
+        mainMenu.style.display = 'none';
+        minecraftGame.style.display = 'block';
+        currentGame = minecraftGame;
+        initMinecraft();
+    });
+
+    leaveBtn.addEventListener('click', () => {
+        popupOverlay.style.display = 'flex';
+    });
+
+    function initTetris() {
+        const GRID_WIDTH = 10;
+        const GRID_HEIGHT = 20;
+        let score = 0;
+        let grid = Array(GRID_HEIGHT).fill().map(() => Array(GRID_WIDTH).fill(0));
+        
+        const TETROMINOES = [
+            [[1, 1, 1, 1]], // I
+            [[1, 1], [1, 1]], // O
+            [[1, 1, 1], [0, 1, 0]], // T
+            [[1, 1, 1], [1, 0, 0]], // L
+            [[1, 1, 1], [0, 0, 1]], // J
+            [[1, 1, 0], [0, 1, 1]], // S
+            [[0, 1, 1], [1, 1, 0]]  // Z
+        ];
+
+        let currentPiece = getNewPiece();
+
+        function getNewPiece() {
+            const shape = TETROMINOES[Math.floor(Math.random() * TETROMINOES.length)];
+            return {
+                shape: shape,
+                x: Math.floor((GRID_WIDTH - shape[0].length) / 2),
+                y: 0,
+                color: `hsl(${Math.random() * 360}, 70%, 50%)`
+            };
+        }
+
+        function drawTetris() {
+            tetrisGame.innerHTML = '';
+            
+            // Draw grid
+            for (let y = 0; y < GRID_HEIGHT; y++) {
+                for (let x = 0; x < GRID_WIDTH; x++) {
+                    if (grid[y][x]) {
+                        const block = document.createElement('div');
+                        block.className = 'tetris-block';
+                        block.style.backgroundColor = grid[y][x];
+                        block.style.left = x * 30 + 'px';
+                        block.style.top = y * 30 + 'px';
+                        tetrisGame.appendChild(block);
+                    }
+                }
+            }
+            
+            // Draw current piece
+            currentPiece.shape.forEach((row, y) => {
+                row.forEach((value, x) => {
+                    if (value) {
+                        const block = document.createElement('div');
+                        block.className = 'tetris-block';
+                        block.style.backgroundColor = currentPiece.color;
+                        block.style.left = (currentPiece.x + x) * 30 + 'px';
+                        block.style.top = (currentPiece.y + y) * 30 + 'px';
+                        tetrisGame.appendChild(block);
+                    }
+                });
+            });
+        }
+
+        function rotate() {
+            const newShape = currentPiece.shape[0].map((_, i) =>
+                currentPiece.shape.map(row => row[i]).reverse()
+            );
+            
+            const originalShape = currentPiece.shape;
+            currentPiece.shape = newShape;
+            
+            if (!canMove(0, 0)) {
+                currentPiece.shape = originalShape;
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (currentGame !== tetrisGame) return;
+            
+            switch (e.key) {
+                case 'ArrowLeft':
+                    if (canMove(-1, 0)) currentPiece.x--;
+                    break;
+                case 'ArrowRight':
+                    if (canMove(1, 0)) currentPiece.x++;
+                    break;
+                case 'ArrowDown':
+                    if (canMove(0, 1)) currentPiece.y++;
+                    break;
+                case 'ArrowUp':
+                    rotate();
+                    break;
+                case ' ':
+                    while (canMove(0, 1)) currentPiece.y++;
+                    break;
+            }
+            drawTetris();
+        });
+
+        function canMove(dx, dy) {
+            return currentPiece.shape.every((row, y) => {
+                return row.every((value, x) => {
+                    const newX = currentPiece.x + x + dx;
+                    const newY = currentPiece.y + y + dy;
+                    return !value || 
+                           (newX >= 0 && newX < GRID_WIDTH &&
+                            newY >= 0 && newY < GRID_HEIGHT &&
+                            !grid[newY][newX]);
+                });
+            });
+        }
+
+        function mergePiece() {
+            currentPiece.shape.forEach((row, y) => {
+                row.forEach((value, x) => {
+                    if (value) {
+                        grid[currentPiece.y + y][currentPiece.x + x] = currentPiece.color;
+                    }
+                });
+            });
+        }
+
+        function clearLines() {
+            for (let y = GRID_HEIGHT - 1; y >= 0; y--) {
+                if (grid[y].every(cell => cell)) {
+                    grid.splice(y, 1);
+                    grid.unshift(Array(GRID_WIDTH).fill(0));
+                    score += 100;
+                }
+            }
+        }
+
+        tetrisInterval = setInterval(() => {
+            if (canMove(0, 1)) {
+                currentPiece.y++;
+            } else {
+                mergePiece();
+                clearLines();
+                currentPiece = getNewPiece();
+                
+                if (!canMove(0, 0)) {
+                    clearInterval(tetrisInterval);
+                    alert(`Game Over! Score: ${score}`);
+                    backBtn.click();
+                }
+            }
+            drawTetris();
+        }, 1000);
+    }
+
+    function initBlockbuster() {
+        const paddle = blockbusterGame.querySelector('.paddle');
+        const ball = blockbusterGame.querySelector('.ball');
+        let ballX = 200;
+        let ballY = 250;
+        let ballDX = 3;
+        let ballDY = -3;
+        let paddleX = 150;
+        let score = 0;
+
+        // Create bricks
+        const bricks = [];
+        for (let i = 0; i < 24; i++) {
+            const brick = document.createElement('div');
+            brick.className = 'brick';
+            brick.style.left = (i % 6) * 65 + 10 + 'px';
+            brick.style.top = Math.floor(i / 6) * 25 + 10 + 'px';
+            brick.style.backgroundColor = `hsl(${i * 15}, 70%, 50%)`;
+            blockbusterGame.appendChild(brick);
+            bricks.push({
+                element: brick,
+                active: true
+            });
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            if (currentGame !== blockbusterGame) return;
+            const rect = blockbusterGame.getBoundingClientRect();
+            const relativeX = e.clientX - rect.left;
+            if (relativeX > 0 && relativeX < blockbusterGame.offsetWidth) {
+                paddleX = relativeX - paddle.offsetWidth / 2;
+                if (paddleX < 0) paddleX = 0;
+                if (paddleX > blockbusterGame.offsetWidth - paddle.offsetWidth) {
+                    paddleX = blockbusterGame.offsetWidth - paddle.offsetWidth;
+                }
+                paddle.style.left = paddleX + 'px';
+            }
+        });
+
+        function checkCollision(brick) {
+            if (!brick.active) return false;
+            
+            const brickRect = brick.element.getBoundingClientRect();
+            const ballRect = ball.getBoundingClientRect();
+            
+            return !(brickRect.right < ballRect.left || 
+                    brickRect.left > ballRect.right || 
+                    brickRect.bottom < ballRect.top || 
+                    brickRect.top > ballRect.bottom);
+        }
+
+        function updateBall() {
+            ballX += ballDX;
+            ballY += ballDY;
+
+            // Wall collisions
+            if (ballX <= 0 || ballX >= blockbusterGame.offsetWidth - ball.offsetWidth) {
+                ballDX = -ballDX;
+            }
+            if (ballY <= 0) {
+                ballDY = -ballDY;
+            }
+
+            // Paddle collision
+            if (ballY >= blockbusterGame.offsetHeight - paddle.offsetHeight - ball.offsetHeight &&
+                ballX >= paddleX && ballX <= paddleX + paddle.offsetWidth) {
+                ballDY = -ballDY;
+                
+                // Add some randomness to the bounce
+                ballDX += (Math.random() - 0.5) * 2;
+                ballDX = Math.min(Math.max(ballDX, -5), 5);
+            }
+
+            // Brick collisions
+            bricks.forEach(brick => {
+                if (checkCollision(brick)) {
+                    brick.active = false;
+                    brick.element.style.display = 'none';
+                    ballDY = -ballDY;
+                    score += 10;
+                    
+                    // Check win condition
+                    if (bricks.every(b => !b.active)) {
+                        clearInterval(blockbusterInterval);
+                        alert(`You won! Score: ${score}`);
+                        backBtn.click();
+                    }
+                }
+            });
+
+            ball.style.left = ballX + 'px';
+            ball.style.top = ballY + 'px';
+
+            // Game over condition
+            if (ballY > blockbusterGame.offsetHeight) {
+                clearInterval(blockbusterInterval);
+                alert(`Game Over! Score: ${score}`);
+                backBtn.click();
+            }
+        }
+
+        blockbusterInterval = setInterval(updateBall, 16);
+    }
+
+    function initMinecraft() {
+        const canvas = document.getElementById('minecraftCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = 800;
+        canvas.height = 600;
+
+        const TILE_SIZE = 32;
+        const WORLD_WIDTH = 25;
+        const WORLD_HEIGHT = 19;
+
+        // Block types
+        const BLOCKS = {
+            AIR: 0,
+            DIRT: 1,
+            GRASS: 2,
+            STONE: 3,
+            WOOD: 4,
+            LEAVES: 5
+        };
+
+        const BLOCK_COLORS = {
+            [BLOCKS.DIRT]: '#8B4513',
+            [BLOCKS.GRASS]: '#228B22',
+            [BLOCKS.STONE]: '#808080',
+            [BLOCKS.WOOD]: '#654321',
+            [BLOCKS.LEAVES]: '#228B22'
+        };
+
+        // Generate world
+        let world = Array(WORLD_HEIGHT).fill().map(() => Array(WORLD_WIDTH).fill(BLOCKS.AIR));
+        
+        // Generate terrain
+        const groundHeight = Math.floor(WORLD_HEIGHT * 0.7);
+        for (let x = 0; x < WORLD_WIDTH; x++) {
+            const height = groundHeight + Math.floor(Math.sin(x * 0.5) * 2);
+            for (let y = height; y < WORLD_HEIGHT; y++) {
+                world[y][x] = y === height ? BLOCKS.GRASS : BLOCKS.DIRT;
+            }
+        }
+
+        // Add some trees
+        for (let x = 2; x < WORLD_WIDTH - 2; x += 5) {
+            if (Math.random() < 0.5) {
+                const groundY = world.findIndex(row => row[x] === BLOCKS.GRASS);
+                if (groundY > 5) {
+                    // Tree trunk
+                    for (let y = groundY - 4; y < groundY; y++) {
+                        world[y][x] = BLOCKS.WOOD;
+                    }
+                    // Tree leaves
+                    for (let ly = groundY - 6; ly < groundY - 3; ly++) {
+                        for (let lx = x - 2; lx <= x + 2; lx++) {
+                            if (lx >= 0 && lx < WORLD_WIDTH && ly >= 0 && world[ly][lx] === BLOCKS.AIR) {
+                                world[ly][lx] = BLOCKS.LEAVES;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Player
+        let player = {
+            x: canvas.width / 2,
+            y: canvas.height / 2,
+            width: TILE_SIZE - 4,
+            height: TILE_SIZE * 2 - 4,
+            speed: 5,
+            velocityY: 0,
+            jumping: false
+        };
+
+        const gravity = 0.5;
+        let selectedBlock = BLOCKS.DIRT;
+
+        function draw() {
+            // Clear canvas
+            ctx.fillStyle = '#87CEEB';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw world
+            for (let y = 0; y < WORLD_HEIGHT; y++) {
+                for (let x = 0; x < WORLD_WIDTH; x++) {
+                    const block = world[y][x];
+                    if (block !== BLOCKS.AIR) {
+                        ctx.fillStyle = BLOCK_COLORS[block];
+                        ctx.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+                        ctx.strokeStyle = '#000';
+                        ctx.strokeRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+                    }
+                }
+            }
+
+            // Draw player
+            ctx.fillStyle = '#FF0000';
+            ctx.fillRect(player.x, player.y, player.width, player.height);
+        }
+
+        function update() {
+            // Apply gravity
+            player.velocityY += gravity;
+            player.y += player.velocityY;
+
+            // Simple collision detection
+            const playerTileX = Math.floor(player.x / TILE_SIZE);
+            const playerTileY = Math.floor((player.y + player.height) / TILE_SIZE);
+
+            if (playerTileY < WORLD_HEIGHT && playerTileX >= 0 && playerTileX < WORLD_WIDTH) {
+                if (world[playerTileY][playerTileX] !== BLOCKS.AIR) {
+                    player.y = playerTileY * TILE_SIZE - player.height;
+                    player.velocityY = 0;
+                    player.jumping = false;
+                }
+            }
+
+            // Keep player in bounds
+            if (player.x < 0) player.x = 0;
+            if (player.x + player.width > canvas.width) player.x = canvas.width - player.width;
+            if (player.y < 0) player.y = 0;
+            if (player.y + player.height > canvas.height) {
+                player.y = canvas.height - player.height;
+                player.velocityY = 0;
+                player.jumping = false;
+            }
+        }
+
+        function gameLoop() {
+            if (currentGame === document.getElementById('minecraftGame')) {
+                update();
+                draw();
+                requestAnimationFrame(gameLoop);
+            }
+        }
+
+        // Controls
+        document.addEventListener('keydown', (e) => {
+            if (currentGame !== document.getElementById('minecraftGame')) return;
+
+            switch (e.key) {
+                case 'ArrowLeft':
+                    player.x -= player.speed;
+                    break;
+                case 'ArrowRight':
+                    player.x += player.speed;
+                    break;
+                case 'ArrowUp':
+                case ' ':
+                    if (!player.jumping) {
+                        player.velocityY = -12;
+                        player.jumping = true;
+                    }
+                    break;
+            }
+        });
+
+        // Mouse controls for block placement/removal
+        canvas.addEventListener('mousedown', (e) => {
+            if (currentGame !== document.getElementById('minecraftGame')) return;
+
+            const rect = canvas.getBoundingClientRect();
+            const x = Math.floor((e.clientX - rect.left) / TILE_SIZE);
+            const y = Math.floor((e.clientY - rect.top) / TILE_SIZE);
+
+            if (x >= 0 && x < WORLD_WIDTH && y >= 0 && y < WORLD_HEIGHT) {
+                if (e.button === 0) { // Left click
+                    world[y][x] = selectedBlock;
+                } else if (e.button === 2) { // Right click
+                    world[y][x] = BLOCKS.AIR;
+                }
+            }
+        });
+
+        // Prevent context menu on right click
+        canvas.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+        });
+
+        // Start game loop
+        gameLoop();
+    }
+
+    const noButton = document.querySelector('.popup-button.no');
+
+    noButton.addEventListener('click', () => {
+        popupOverlay.style.display = 'none';
+    });
+
+    // Close popup when clicking outside
+    popupOverlay.addEventListener('click', (e) => {
+        if (e.target === popupOverlay) {
+            popupOverlay.style.display = 'none';
+        }
+    });
+
+    const yesButton = document.querySelector('.popup-button.yes');
+    yesButton.addEventListener('click', () => {
+        document.querySelector('.main-menu h1').textContent = "nuh uh you ain't leaving";
+        document.getElementById('gamesBtn').textContent = "nuh uh you ain't leaving";
+        document.getElementById('leaveBtn').textContent = "nuh uh you ain't leaving";
+        document.getElementById('backBtn').textContent = "nuh uh you ain't leaving";
+        document.getElementById('tetrisLink').textContent = "nuh uh you ain't leaving";
+        document.getElementById('blockbusterLink').textContent = "nuh uh you ain't leaving";
+        document.getElementById('minecraftLink').textContent = "nuh uh you ain't leaving";
+        
+        document.querySelector('.popup h2').textContent = "nuh uh you ain't leaving";
+        yesButton.textContent = "nuh uh you ain't leaving";
+        document.querySelector('.popup-button.no').textContent = "nuh uh you ain't leaving";
+        
+        yesButton.style.animation = "crazyNoShake 0.1s infinite";
+        yesButton.style.width = "auto";
+
+        // Add rainbow effect to everything
+        document.body.classList.add('rainbow-mode');
+        
+        // Play the SAM audio file
+        const audio = new Audio('https://cdn.discordapp.com/attachments/1313411856026701876/1313411888419180584/sam452.wav?ex=675009a4&is=674eb824&hm=2b7681ad118cf237c0967491b48bdcb2f6aa1d25186fc6d506718077553031dd&');
+        audio.play();
+    });
+
+    // Add click handler for gif button
+    const gifBtn = document.getElementById('gifBtn');
+    let audioLoop = null;
+
+    oiiaoiiaBtn.addEventListener('click', () => { // New button event listener
+        if (!audioLoop) {
+            // Start spinning and audio
+            audioLoop = new Audio('https://cdn.discordapp.com/attachments/1313411856026701876/1313606808631251004/videoplayback12.wav?ex=6750bf2c&is=674f6dac&hm=57a3788c35b8ed0b6e1025e66b7a806a7b9ce47505160f1d493088b7f1ce5cb0&');
+            audioLoop.loop = true;
+            audioLoop.play();
+            
+            // Add spinning class to all elements
+            const allElements = document.getElementsByTagName('*');
+            for (let element of allElements) {
+                element.classList.add('spinning');
+            }
+            
+            // Add rotating background
+            document.body.classList.add('rotating-background');
+            
+            // Update button text
+            oiiaoiiaBtn.textContent = "STOP SPINNING!";
+        } else {
+            // Stop spinning and audio
+            audioLoop.pause();
+            audioLoop = null;
+            
+            // Remove spinning class from all elements
+            const allElements = document.getElementsByTagName('*');
+            for (let element of allElements) {
+                element.classList.remove('spinning');
+            }
+            
+            // Remove rotating background
+            document.body.classList.remove('rotating-background');
+            
+            // Reset button text
+            oiiaoiiaBtn.textContent = "oiiaoiia";
+        }
+    });
+});
+</script>
+
+</body></html>
